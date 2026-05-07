@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:flutter/material.dart';
 import '../models/game.dart';
 import 'reveal_screen.dart';
@@ -12,6 +13,8 @@ class ResultScreen extends StatefulWidget {
 
 class _ResultScreenState extends State<ResultScreen> {
   bool _revealed = false;
+  late final int _startingPlayer =
+      Random.secure().nextInt(widget.game.playerCount) + 1;
 
   void _playAgain() {
     final next = Game.create(
@@ -63,6 +66,39 @@ class _ResultScreenState extends State<ResultScreen> {
             color: Colors.white.withValues(alpha: 0.75),
             fontSize: 16,
             height: 1.5,
+          ),
+        ),
+        const SizedBox(height: 32),
+        Container(
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 18),
+          decoration: BoxDecoration(
+            color: Colors.white.withValues(alpha: 0.08),
+            borderRadius: BorderRadius.circular(16),
+            border: Border.all(
+              color: Colors.white.withValues(alpha: 0.15),
+            ),
+          ),
+          child: Column(
+            children: [
+              Text(
+                'STARTS',
+                style: TextStyle(
+                  color: Colors.white.withValues(alpha: 0.6),
+                  fontSize: 12,
+                  fontWeight: FontWeight.w600,
+                  letterSpacing: 3,
+                ),
+              ),
+              const SizedBox(height: 8),
+              Text(
+                'PLAYER $_startingPlayer',
+                style: const TextStyle(
+                  fontSize: 36,
+                  fontWeight: FontWeight.w900,
+                  letterSpacing: 2,
+                ),
+              ),
+            ],
           ),
         ),
         const Spacer(),
