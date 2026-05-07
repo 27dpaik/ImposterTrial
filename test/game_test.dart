@@ -49,12 +49,12 @@ void main() {
   });
 
   test('throws on empty category', () {
-    final bca = wordBank.firstWhere((c) => c.name == 'BCA');
+    const empty = Category('Empty', []);
     expect(
       () => Game.create(
         playerCount: 4,
         imposterCount: 1,
-        category: bca,
+        category: empty,
       ),
       throwsStateError,
     );

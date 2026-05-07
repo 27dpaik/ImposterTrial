@@ -91,5 +91,11 @@ const List<Category> wordBank = [
     'MrBeast', 'Met Gala',
   ]),
   Category('BCA', [
+    'Mr. Bolton', 'Dr. Abramson', 'Mrs. Mendelsohn', 'Mr. Isecke', 'Dr. Carter',
+    'Senora Seltzer', 'Mr. Bonanomi', 'Mrs. Crimmel', 'Ms. Kaba', 'Mr. Smith',
+    'Mrs. Acuna', 'Mr. Madden', 'Mrs. Wallace', 'Ms. Kim', 'Dr. Todd Crane',
+    'Dr. Laura Crane', 'Mrs. Sorrentino', 'Mr. Hodroski', 'Mr. Russo',
+    'Dr. Zubov', 'Ms. Pinke', 'Dr. Bath', 'Mr. Davis', 'Dr. Sabio',
+    'Mr. Pinyan', 'Mr. King', 'Mrs. Villanova', 'Dr. Pinto',
   ]),
 ];
