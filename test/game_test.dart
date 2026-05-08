@@ -60,7 +60,7 @@ void main() {
     );
   });
 
-  test('all 12 categories exist with expected names', () {
+  test('all categories exist with expected names', () {
     final names = wordBank.map((c) => c.name).toList();
     expect(names, [
       'Food',
@@ -75,6 +75,14 @@ void main() {
       'Fast-food Chains',
       'Pop Culture',
       'BCA',
+      'Jobs',
+      'Places',
+      'Sex',
     ]);
+  });
+
+  test('Sex category is marked hidden, others are not', () {
+    final hidden = wordBank.where((c) => c.isHidden).map((c) => c.name).toList();
+    expect(hidden, ['Sex']);
   });
 }

@@ -1,7 +1,8 @@
 class Category {
   final String name;
   final List<String> words;
-  const Category(this.name, this.words);
+  final bool isHidden;
+  const Category(this.name, this.words, {this.isHidden = false});
 }
 
 const List<Category> wordBank = [
@@ -98,4 +99,33 @@ const List<Category> wordBank = [
     'Dr. Zubov', 'Ms. Pinke', 'Dr. Bath', 'Mr. Davis', 'Dr. Sabio',
     'Mr. Pinyan', 'Mr. King', 'Mrs. Villanova', 'Dr. Pinto',
   ]),
+  Category('Jobs', [
+    'Doctor', 'Nurse', 'Teacher', 'Lawyer', 'Engineer', 'Accountant',
+    'Firefighter', 'Police Officer', 'Chef', 'Pilot', 'Flight Attendant',
+    'Surgeon', 'Dentist', 'Veterinarian', 'Architect', 'Plumber', 'Electrician',
+    'Carpenter', 'Mechanic', 'Farmer', 'Banker', 'Real Estate Agent',
+    'Journalist', 'Photographer', 'Graphic Designer', 'Software Developer',
+    'Scientist', 'Professor', 'Librarian', 'Therapist', 'Pharmacist',
+    'Bartender', 'Barista', 'Lifeguard', 'Personal Trainer', 'Athlete',
+    'Actor', 'Musician', 'DJ', 'Streamer',
+  ]),
+  Category('Places', [
+    'Beach', 'Mountain', 'Forest', 'Desert', 'Park', 'Library', 'Museum',
+    'Airport', 'Train Station', 'Hospital', 'School', 'University', 'Church',
+    'Mosque', 'Temple', 'Stadium', 'Concert Hall', 'Movie Theater', 'Gym',
+    'Mall', 'Grocery Store', 'Restaurant', 'Cafe', 'Hotel', 'Casino',
+    'Amusement Park', 'Zoo', 'Aquarium', 'Bowling Alley', 'Arcade', 'Skatepark',
+    'Office Building', 'Construction Site', 'Farm', 'Lighthouse', 'Castle',
+    'Cave', 'Volcano', 'Island', 'Pier',
+  ]),
+  Category('Sex', [
+    'Flirting', 'Crush', 'Kiss', 'Make Out', 'Hookup', 'One Night Stand',
+    'Friends with Benefits', 'Situationship', 'Booty Call', 'Sexting',
+    'Netflix and Chill', 'Slide Into DMs', 'Tinder', 'Bumble', 'Hinge',
+    'Dating App', 'Swipe Right', 'Match', 'Ghosting', 'Body Count',
+    'Walk of Shame', 'Wingman', 'Pickup Line', 'Cougar', 'Sugar Daddy',
+    'Catfish', 'DTR', 'Soft Launch', 'Hard Launch', 'Rebound', 'Ex',
+    'Friendzone', 'Lovebombing', 'Chemistry', 'Foreplay', 'Lingerie',
+    'Roses', 'Candlelight', 'Slow Dance', 'Honeymoon',
+  ], isHidden: true),
 ];

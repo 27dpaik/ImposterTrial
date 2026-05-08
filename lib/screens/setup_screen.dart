@@ -16,7 +16,11 @@ class _SetupScreenState extends State<SetupScreen> {
 
   int _playerCount = 5;
   int _imposterCount = 1;
-  Category _category = wordBank.firstWhere((c) => c.words.isNotEmpty);
+  Category _category =
+      wordBank.firstWhere((c) => c.words.isNotEmpty && !c.isHidden);
+  bool _hiddenUnlocked = false;
+  int _titleTaps = 0;
+  DateTime _firstTapAt = DateTime.fromMillisecondsSinceEpoch(0);
 
   int get _maxImposters {
     final cap = (_playerCount - 1) ~/ 2;
@@ -34,6 +38,27 @@ class _SetupScreenState extends State<SetupScreen> {
     setState(() {
       _imposterCount = n.clamp(1, _maxImposters);
     });
+  }
+
+  void _onTitleTap() {
+    final now = DateTime.now();
+    if (now.difference(_firstTapAt) > const Duration(seconds: 3)) {
+      _titleTaps = 1;
+      _firstTapAt = now;
+    } else {
+      _titleTaps += 1;
+    }
+    if (_titleTaps >= 5 && !_hiddenUnlocked) {
+      setState(() => _hiddenUnlocked = true);
+      _titleTaps = 0;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('🔓 Hidden categories unlocked'),
+          behavior: SnackBarBehavior.floating,
+          duration: Duration(seconds: 2),
+        ),
+      );
+    }
   }
 
   void _start() {
@@ -65,13 +90,17 @@ class _SetupScreenState extends State<SetupScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const Text(
-                'IMPOSTER',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 44,
-                  fontWeight: FontWeight.w900,
-                  letterSpacing: 6,
+              GestureDetector(
+                onTap: _onTitleTap,
+                behavior: HitTestBehavior.opaque,
+                child: const Text(
+                  'IMPOSTER',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 44,
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: 6,
+                  ),
                 ),
               ),
               const SizedBox(height: 8),
@@ -114,13 +143,14 @@ class _SetupScreenState extends State<SetupScreen> {
                 runSpacing: 8,
                 children: [
                   for (final c in wordBank)
-                    ChoiceChip(
-                      label: Text(
-                        c.words.isEmpty ? '${c.name} (empty)' : c.name,
+                    if (!c.isHidden || _hiddenUnlocked)
+                      ChoiceChip(
+                        label: Text(
+                          c.words.isEmpty ? '${c.name} (empty)' : c.name,
+                        ),
+                        selected: _category.name == c.name,
+                        onSelected: (_) => setState(() => _category = c),
                       ),
-                      selected: _category.name == c.name,
-                      onSelected: (_) => setState(() => _category = c),
-                    ),
                 ],
               ),
               const SizedBox(height: 32),
